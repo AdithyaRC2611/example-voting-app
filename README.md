@@ -118,7 +118,6 @@ Docker Hub - https://hub.docker.com/repository/docker/adithyarc26/vote/general
 
 4. **Create Jenkins Pipeline:**
    ```groovy
-
 pipeline{
     agent any
     environment {
