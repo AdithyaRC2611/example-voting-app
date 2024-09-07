@@ -1,3 +1,5 @@
+Docker Hub - https://hub.docker.com/repository/docker/adithyarc26/vote/general
+
 # Capstone1 deploy python app in minikube using Jenkins - DevSecOps Project!
 ### **Phase 1: Initial Setup and Deployment**
 **Step 1: Launch EC2 (Ubuntu 22.04):**
@@ -112,8 +114,9 @@
    1 SonarQube scanner
    2 Kubernetes plugin
    3 docker plugin
+   4 Prometheus plugin
 
-3. **Create Jenkins Pipeline:**
+4. **Create Jenkins Pipeline:**
    ```groovy
 
 pipeline{
@@ -233,4 +236,47 @@ scrape_configs:
     static_configs:
       - targets: ["34.195.12.92:8080"]
 ```
+
+2. **Install Grafana and configure Prometheus as data source**
+Step 1: Add Grafana Helm Repository
+First, ensure that you have added the Grafana Helm repository and updated the repository list:
+
+```bash
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
+Step 2: Install Grafana
+Create a Namespace for Grafana (optional):
+kubectl create namespace monitoring
+```
+Install Grafana using Helm:
+
+```bash
+helm install grafana grafana/grafana --namespace monitoring
+```
+This command installs Grafana in the monitoring namespace. If you prefer to use the default namespace, you can omit the --namespace flag.
+
+Step 3: Access Grafana
+Retrieve the Admin Password:
+
+After installation, retrieve the Grafana admin password:
+
+```bash
+kubectl get secret --namespace monitoring grafana-admin-password -o go-template='{{ .data.password | base64decode }}'
+Replace monitoring with your namespace if you used a different one.
+```
+Log in to Grafana:
+
+Username: admin
+Password: The password you retrieved in step 1.
+Step 4: Configure Grafana
+Add Prometheus as a Data Source:
+
+If you have Prometheus running, add it as a data source in Grafana:
+
+Log in to Grafana.
+Go to Configuration (gear icon) > Data Sources.
+Click Add data source.
+Select Prometheus.
+Set the URL to http://prometheus-server:80 (or the appropriate service name and port for your Prometheus installation).
+Click Save & Test.
 
