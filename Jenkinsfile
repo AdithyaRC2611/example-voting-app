@@ -48,9 +48,9 @@ pipeline{
         stage('Deploy to container'){
             steps{
                 sh 'docker run -itd -p 8081:80 adithyarc26/vote:latest'
-                sh 'kubectl apply -f deployment.yml'
-                sh 'kubectl apply -f service.yml'
-                sh 'kubectl apply -f ingress.yml'
+                sh 'kubectl apply -f K8s/deployment.yml'
+                sh 'kubectl apply -f K8s/service.yml'
+                sh 'kubectl apply -f K8s/ingress.yml'
             }
         }
     }
