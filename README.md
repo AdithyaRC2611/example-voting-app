@@ -1,6 +1,6 @@
 Docker Hub - https://hub.docker.com/repository/docker/adithyarc26/vote/general
 
-# Capstone1 deploy python app in minikube using Jenkins - DevSecOps Project!
+# Capstone1 deploy python app in minikube using Jenkins - Upgrad Devops Project!
 ### **Phase 1: Initial Setup and Deployment**
 **Step 1: Launch EC2 (Ubuntu 22.04):**
 
